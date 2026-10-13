@@ -1,6 +1,0 @@
-#!/home/prisha/pqfl/venv/bin/python3
-import sys
-from flwr.client.supernode.app import run_supernode
-if __name__ == '__main__':
-    sys.argv[0] = sys.argv[0].removesuffix('.exe')
-    sys.exit(run_supernode())
