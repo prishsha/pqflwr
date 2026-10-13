@@ -78,3 +78,68 @@ run: `runs/20261013-062815_sweep_loss_H2_d10_l5`
 
 At 10 ms configured delay and 5% loss: 300 handshakes, mean latency 51.27 ms, p95 111.72 ms, TCP retransmission total 148.
 
+### OBS-0017 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=5 R=10: total 32.6672 s (setup 0.0433 s, rounds 32.6239 s), F1 0.9451, update 139792 B per client per round, run-to-run spread 8.5757 s (5 repeats).
+
+### OBS-0018 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=5 R=50: total 204.7628 s (setup 0.0430 s, rounds 204.7198 s), F1 0.9611, update 139792 B per client per round, run-to-run spread 34.9460 s (5 repeats).
+
+### OBS-0019 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=5 R=100: total 368.3301 s (setup 0.0341 s, rounds 368.2960 s), F1 0.9634, update 139792 B per client per round, run-to-run spread 58.2844 s (5 repeats).
+
+### OBS-0020 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=10 R=10: total 21.3629 s (setup 0.0882 s, rounds 21.2747 s), F1 0.9408, update 139792 B per client per round, run-to-run spread 5.1186 s (5 repeats).
+
+### OBS-0021 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=10 R=50: total 106.1790 s (setup 0.0857 s, rounds 106.0933 s), F1 0.9538, update 139792 B per client per round, run-to-run spread 12.2019 s (5 repeats).
+
+### OBS-0022 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=10 R=100: total 208.2641 s (setup 0.0777 s, rounds 208.1864 s), F1 0.9613, update 139792 B per client per round, run-to-run spread 18.5964 s (5 repeats).
+
+### OBS-0023 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=20 R=10: total 15.2408 s (setup 0.5863 s, rounds 14.6545 s), F1 0.9332, update 139792 B per client per round, run-to-run spread 1.6983 s (5 repeats).
+
+### OBS-0024 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=20 R=50: total 83.6265 s (setup 0.1638 s, rounds 83.4626 s), F1 0.9472, update 139792 B per client per round, run-to-run spread 13.9365 s (5 repeats).
+
+### OBS-0025 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=native C=20 R=100: total 163.7273 s (setup 0.1676 s, rounds 163.5597 s), F1 0.9542, update 139792 B per client per round, run-to-run spread 29.7273 s (5 repeats).
+
+### OBS-0026 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=reconnect C=5 R=10: total 33.0187 s (setup 0.3654 s, rounds 32.6533 s), F1 0.9451, update 139792 B per client per round, run-to-run spread 10.0625 s (3 repeats).
+
+### OBS-0027 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=reconnect C=5 R=50: total 119.0132 s (setup 1.7255 s, rounds 117.2877 s), F1 0.9611, update 139792 B per client per round, run-to-run spread 1.7409 s (3 repeats).
+
+### OBS-0028 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=reconnect C=10 R=10: total 20.9896 s (setup 0.7442 s, rounds 20.2454 s), F1 0.9408, update 139792 B per client per round, run-to-run spread 5.1177 s (3 repeats).
+
+### OBS-0029 | stage 2 | PLAIN | measurement | 2026-10-13 09:21:03
+run: `-`
+
+Baseline mode=reconnect C=10 R=50: total 109.3560 s (setup 3.8114 s, rounds 105.5446 s), F1 0.9538, update 139792 B per client per round, run-to-run spread 33.7010 s (3 repeats).
+
