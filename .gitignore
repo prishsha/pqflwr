@@ -43,3 +43,6 @@ results/
 # Temporary files
 *.tmp
 *.bak
+
+#data
+data/processed.npz
