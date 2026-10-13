@@ -1,0 +1,120 @@
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.server.start_server() is deprecated.
+	Instead, use the `flower-superlink` CLI command to start a SuperLink as shown below:
+
+		$ flower-superlink --insecure
+
+	To view usage and all available options, run:
+
+		$ flower-superlink --help
+
+	Using `start_server()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[92mINFO [0m:      Starting Flower server, config: num_rounds=10, no round_timeout
+[92mINFO [0m:      Flower ECE: gRPC server running (10 rounds), SSL is disabled
+[92mINFO [0m:      [INIT]
+[92mINFO [0m:      Using initial global parameters provided by strategy
+[92mINFO [0m:      Starting evaluation of initial global parameters
+[92mINFO [0m:      initial parameters (loss, other metrics): 1.3367555141448975, {'acc': 0.14605, 'f1': 0.14336198388588106}
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 1]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[93mWARNING [0m:   No fit_metrics_aggregation_fn provided
+[92mINFO [0m:      fit progress: (1, 0.11732824146747589, {'acc': 0.9572, 'f1': 0.9199542341034928}, 2.5664417329999196)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 2]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (2, 0.09601737558841705, {'acc': 0.96075, 'f1': 0.9281333975606804}, 4.318790329999501)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 3]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (3, 0.0874614492058754, {'acc': 0.9630833333333333, 'f1': 0.9329556910533652}, 6.0116144599996915)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 4]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (4, 0.08245135098695755, {'acc': 0.9645166666666667, 'f1': 0.9357099749760062}, 9.045417336000355)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 5]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (5, 0.07910459488630295, {'acc': 0.9652666666666667, 'f1': 0.9371577327880216}, 11.656350823999674)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 6]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (6, 0.07657003402709961, {'acc': 0.9662333333333334, 'f1': 0.9389067018371074}, 14.471004910000374)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 7]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (7, 0.07450840622186661, {'acc': 0.96695, 'f1': 0.9402587574577229}, 16.66919243099983)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 8]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (8, 0.07295462489128113, {'acc': 0.9687666666666667, 'f1': 0.9438159506000576}, 19.55869406599959)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 9]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (9, 0.07155356556177139, {'acc': 0.9689166666666666, 'f1': 0.9441058766564301}, 22.33694809699955)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 10]
+[92mINFO [0m:      configure_fit: strategy sampled 5 clients (out of 5)
+[92mINFO [0m:      aggregate_fit: received 5 results and 0 failures
+[92mINFO [0m:      fit progress: (10, 0.070350781083107, {'acc': 0.9694833333333334, 'f1': 0.9451073190910257}, 25.918269851000332)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [SUMMARY]
+[92mINFO [0m:      Run finished 10 round(s) in 25.92s
+[92mINFO [0m:      	History (loss, centralized):
+[92mINFO [0m:      		round 0: 1.3367555141448975
+[92mINFO [0m:      		round 1: 0.11732824146747589
+[92mINFO [0m:      		round 2: 0.09601737558841705
+[92mINFO [0m:      		round 3: 0.0874614492058754
+[92mINFO [0m:      		round 4: 0.08245135098695755
+[92mINFO [0m:      		round 5: 0.07910459488630295
+[92mINFO [0m:      		round 6: 0.07657003402709961
+[92mINFO [0m:      		round 7: 0.07450840622186661
+[92mINFO [0m:      		round 8: 0.07295462489128113
+[92mINFO [0m:      		round 9: 0.07155356556177139
+[92mINFO [0m:      		round 10: 0.070350781083107
+[92mINFO [0m:      	History (metrics, centralized):
+[92mINFO [0m:      	{'acc': [(0, 0.14605),
+[92mINFO [0m:      	         (1, 0.9572),
+[92mINFO [0m:      	         (2, 0.96075),
+[92mINFO [0m:      	         (3, 0.9630833333333333),
+[92mINFO [0m:      	         (4, 0.9645166666666667),
+[92mINFO [0m:      	         (5, 0.9652666666666667),
+[92mINFO [0m:      	         (6, 0.9662333333333334),
+[92mINFO [0m:      	         (7, 0.96695),
+[92mINFO [0m:      	         (8, 0.9687666666666667),
+[92mINFO [0m:      	         (9, 0.9689166666666666),
+[92mINFO [0m:      	         (10, 0.9694833333333334)],
+[92mINFO [0m:      	 'f1': [(0, 0.14336198388588106),
+[92mINFO [0m:      	        (1, 0.9199542341034928),
+[92mINFO [0m:      	        (2, 0.9281333975606804),
+[92mINFO [0m:      	        (3, 0.9329556910533652),
+[92mINFO [0m:      	        (4, 0.9357099749760062),
+[92mINFO [0m:      	        (5, 0.9371577327880216),
+[92mINFO [0m:      	        (6, 0.9389067018371074),
+[92mINFO [0m:      	        (7, 0.9402587574577229),
+[92mINFO [0m:      	        (8, 0.9438159506000576),
+[92mINFO [0m:      	        (9, 0.9441058766564301),
+[92mINFO [0m:      	        (10, 0.9451073190910257)]}
+[92mINFO [0m:      
