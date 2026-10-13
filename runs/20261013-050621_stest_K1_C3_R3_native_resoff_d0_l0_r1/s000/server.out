@@ -1,0 +1,54 @@
+[93mWARNING [0m:   DEPRECATED FEATURE: flwr.server.start_server() is deprecated.
+	Instead, use the `flower-superlink` CLI command to start a SuperLink as shown below:
+
+		$ flower-superlink --insecure
+
+	To view usage and all available options, run:
+
+		$ flower-superlink --help
+
+	Using `start_server()` is deprecated.
+
+            This is a deprecated feature. It will be removed
+            entirely in future versions of Flower.
+        
+[92mINFO [0m:      Starting Flower server, config: num_rounds=3, no round_timeout
+[92mINFO [0m:      Flower ECE: gRPC server running (3 rounds), SSL is disabled
+[92mINFO [0m:      [INIT]
+[92mINFO [0m:      Using initial global parameters provided by strategy
+[92mINFO [0m:      Starting evaluation of initial global parameters
+[92mINFO [0m:      initial parameters (loss, other metrics): 1.3367555141448975, {'acc': 0.14605, 'f1': 0.14336198388588106}
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 1]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+[93mWARNING [0m:   No fit_metrics_aggregation_fn provided
+[92mINFO [0m:      fit progress: (1, 0.10099224746227264, {'acc': 0.9605, 'f1': 0.927708340673072}, 23.338079368000308)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 2]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (2, 0.08576897531747818, {'acc': 0.9639166666666666, 'f1': 0.9347231055520222}, 44.621046018000015)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [ROUND 3]
+[92mINFO [0m:      configure_fit: strategy sampled 3 clients (out of 3)
+[92mINFO [0m:      aggregate_fit: received 3 results and 0 failures
+[92mINFO [0m:      fit progress: (3, 0.0795372873544693, {'acc': 0.96435, 'f1': 0.9352403135460565}, 64.02094205000003)
+[92mINFO [0m:      configure_evaluate: no clients selected, skipping evaluation
+[92mINFO [0m:      
+[92mINFO [0m:      [SUMMARY]
+[92mINFO [0m:      Run finished 3 round(s) in 64.02s
+[92mINFO [0m:      	History (loss, centralized):
+[92mINFO [0m:      		round 0: 1.3367555141448975
+[92mINFO [0m:      		round 1: 0.10099224746227264
+[92mINFO [0m:      		round 2: 0.08576897531747818
+[92mINFO [0m:      		round 3: 0.0795372873544693
+[92mINFO [0m:      	History (metrics, centralized):
+[92mINFO [0m:      	{'acc': [(0, 0.14605), (1, 0.9605), (2, 0.9639166666666666), (3, 0.96435)],
+[92mINFO [0m:      	 'f1': [(0, 0.14336198388588106),
+[92mINFO [0m:      	        (1, 0.927708340673072),
+[92mINFO [0m:      	        (2, 0.9347231055520222),
+[92mINFO [0m:      	        (3, 0.9352403135460565)]}
+[92mINFO [0m:      

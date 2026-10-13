@@ -1,0 +1,26 @@
+{
+  "time_utc": "2026-10-13T05:07:31Z",
+  "host": "LAPTOP-5A3VQ9IA",
+  "kernel": "6.18.33.2-microsoft-standard-WSL2",
+  "python": "3.12.3",
+  "cpu": "Intel(R) Core(TM) Ultra 7 155H",
+  "openssl": "n/a",
+  "nginx": "n/a",
+  "pip": "flwr              1.13.1 grpcio            1.64.3 numpy             1.26.4",
+  "cmdline": "controller/run_experiment.py --cfg K1 --clients 3 --rounds 3 --local-test --stage test",
+  "args": {
+    "cfg": "K1",
+    "clients": 3,
+    "rounds": 3,
+    "mode": "native",
+    "resume": "off",
+    "repeat": 1,
+    "delay_ms": 0,
+    "loss": 0,
+    "stage": "test",
+    "data": "/home/prisha/pqfl/data/processed.npz",
+    "local_test": true,
+    "epochs": 1
+  },
+  "run_id": "20261013-050621_stest_K1_C3_R3_native_resoff_d0_l0_r1"
+}

@@ -1,0 +1,23 @@
+{
+  "run_id": "20261013-050621_stest_K1_C3_R3_native_resoff_d0_l0_r1",
+  "stage": "test",
+  "cfg": "K1",
+  "mode": "native",
+  "resume": "off",
+  "clients": 3,
+  "rounds": 3,
+  "repeat": 1,
+  "delay_ms": 0,
+  "loss_pct": 0,
+  "local_test": true,
+  "setup_total_s": 0.06550431251525879,
+  "rounds_total_s": 66.25348138809204,
+  "logical_total_s": 66.3189857006073,
+  "wall_total_s": 69.14386868476868,
+  "final_f1": 0.9352403135460565,
+  "model_bytes_one_way": 69896,
+  "update_bytes_per_client_round": 139792,
+  "cpu_fl_server_s": 12.844460736,
+  "cpu_fl_clients_s": 1452.050219099,
+  "srv_tcp_retrans_delta": 0
+}

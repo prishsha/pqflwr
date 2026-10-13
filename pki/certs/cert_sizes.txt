@@ -1,0 +1,5 @@
+=== certificate sizes (DER bytes) and signature algorithms ===
+ca-ecdsa.crt  DER=390 bytes  sig=ecdsa-with-SHA256
+ca-mldsa65.crt  DER=5520 bytes  sig=ML-DSA-65
+server-ecdsa.crt  DER=395 bytes  sig=ecdsa-with-SHA256
+server-mldsa65.crt  DER=5522 bytes  sig=ML-DSA-65

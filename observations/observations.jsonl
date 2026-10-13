@@ -1,1 +1,5 @@
 {"id": "OBS-0001", "utc": "2026-10-13 04:26:48", "stage": "0", "cfg": "-", "run": "-", "kind": "setup", "text": "OpenSSL <version> built from source in /opt/openssl-3.5; ML-KEM-768, X25519MLKEM768, ML-DSA-65 present natively in default provider."}
+{"id": "OBS-0002", "utc": "2026-10-13 04:39:44", "stage": "0", "cfg": "-", "run": "-", "kind": "setup", "text": "nginx 1.27.4 built statically with OpenSSL <version>; stream + stream_ssl modules enabled."}
+{"id": "OBS-0003", "utc": "2026-10-13 04:40:40", "stage": "0", "cfg": "-", "run": "-", "kind": "setup", "text": "Two namespaces (cli 10.10.0.2, srv 10.10.0.1) joined by veth, MTU 1500, TSO/GSO/GRO off. netem applied on both sides (delay 0, loss 0 by default)."}
+{"id": "OBS-0004", "utc": "2026-10-13 04:41:06", "stage": "1", "cfg": "-", "run": "-", "kind": "measurement", "text": "Cert DER sizes: ecdsa CA=<..> leaf=<..>; mldsa65 CA=<..> leaf=<..> bytes."}
+{"id": "OBS-0005", "utc": "2026-10-13 05:06:08", "stage": "0", "cfg": "-", "run": "-", "kind": "setup", "text": "CIC-IDS2017: 2520798 rows after cleaning, attack fraction 0.169, subsampled to 300000 rows, features=70, 80/20 split, binary label, IID client shards."}
