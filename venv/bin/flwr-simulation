@@ -1,0 +1,6 @@
+#!/home/prisha/pqfl/venv/bin/python3
+import sys
+from flwr.simulation.app import flwr_simulation
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(flwr_simulation())

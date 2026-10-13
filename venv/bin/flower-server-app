@@ -1,0 +1,6 @@
+#!/home/prisha/pqfl/venv/bin/python3
+import sys
+from flwr.server.run_serverapp import run_server_app
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(run_server_app())
