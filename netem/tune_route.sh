@@ -9,7 +9,7 @@ opts=""
 rc=0
 for spec in "srv veth-s 10.10.0.1" "cli veth-c 10.10.0.2"; do
   read ns dev ip <<< "$spec"
-  sudo ip netns exec $ns ip route change 10.10.0.0/24 dev $dev proto kernel scope link src $ip $opts 2>/tmp/route_err.txt || rc=1
+  ip netns exec $ns ip route change 10.10.0.0/24 dev $dev proto kernel scope link src $ip $opts 2>/tmp/route_err.txt || rc=1
 done
 if [ $rc != 0 ]; then echo "ERROR: could not set route options ($opts)" >&2; cat /tmp/route_err.txt >&2; exit 1; fi
 exit 0

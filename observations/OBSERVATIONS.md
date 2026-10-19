@@ -143,3 +143,48 @@ run: `-`
 
 Baseline mode=reconnect C=10 R=50: total 109.3560 s (setup 3.8114 s, rounds 105.5446 s), F1 0.9538, update 139792 B per client per round, run-to-run spread 33.7010 s (3 repeats).
 
+### OBS-0030 | stage 3 | - | decision | 2026-10-15 15:06:58
+run: `-`
+
+Matrix run: modes=native,reconnect; native C=5,10,20 R=10,50,100; reconnect C=5,10 R=10,50; repeats=3; resume=off; 156 result rows recorded.
+
+### OBS-0031 | stage 6 | - | setup | 2026-10-19 15:59:01
+run: `-`
+
+Updated code to v2: control/data-plane metrics, netem rate, TCP knobs, resumable matrix, statistics, analytical model. 4 unit tests pass.
+
+### OBS-0032 | stage 6 | - | verification | 2026-10-19 16:10:11
+run: `-`
+
+netem verified: 25ms one-way delay -> ping RTT avg 50.696 ms; configured 3% loss -> observed 3.67% ping loss (11/300 packets); 20 Mbit/s -> iperf3 receiver 19.0 Mbit/s; initcwnd 4 and rto_min 50ms applied and reset successfully.
+
+### OBS-0033 | stage 6 | - | decision | 2026-10-19 16:11:49
+run: `-`
+
+Network profiles verified in controller/profiles.py: LAN (RTT ~0.1 ms, unlimited bandwidth, 0% loss), WAN50 (RTT 50 ms, 20 Mbit/s, 0% loss), WAN100 (RTT 100 ms, 20 Mbit/s, 0% loss), LOSS1 (RTT 50 ms, 20 Mbit/s, 1% loss), LOSS3 (RTT 100 ms, 20 Mbit/s, 3% loss), LOSS5 (RTT 100 ms, 20 Mbit/s, 5% loss). Delay is configured one-way; RTT is approximately twice the delay. Loss is applied on the server-side network interface, affecting server-to-client traffic. Profiles cover ideal LAN, high-latency links, and lossy constrained networks.
+
+### OBS-0034 | stage 6 | H2 | verification | 2026-10-19 16:23:34
+run: `-`
+
+Calibration H2 WAN100 transient C=10 R=10: control plane 4.517 s, data plane 6.551 s, compute 66.441 s, total 78.799 s; parts sum to total.
+
+### OBS-0035 | stage 6 | H2 | measurement | 2026-10-19 17:14:34
+run: `-`
+
+initcwnd=4, RTT 50 ms: server flight 10223 B in 8 segments, bursts 2.00, handshake 106.57 ms vs 56.87 ms at initcwnd=10 -> extra RTT likely.
+
+### OBS-0036 | stage 6 | H2 | measurement | 2026-10-19 17:14:38
+run: `-`
+
+Loss 3%, RTT 100 ms: H2 p95 309.94 ms, p99 521.31 ms, retransmissions 53 (K1: p95 104.38 ms, p99 410.47 ms, retransmissions 24).
+
+### OBS-0037 | stage 6 | - | measurement | 2026-10-19 17:14:43
+run: `-`
+
+CPU time per handshake (server/client, ms): K1 2.267/17.996, H1 3.200/22.555, H2 1.533/6.751, P1 1.500/6.777.
+
+### OBS-0038 | stage 6 | H2 | anomaly | 2026-10-19 17:14:52
+run: `-`
+
+H2 full handshake at RTT 50 ms: initcwnd=4 produced a 52.62 ms server-flight span and 106.57 ms mean handshake latency, compared with a 3.74 ms flight span and 56.87 ms mean at initcwnd=10. The roughly 50 ms difference is consistent with an additional RTT, but requires confirmation from packet captures.
+

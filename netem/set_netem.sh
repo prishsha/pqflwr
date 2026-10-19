@@ -4,8 +4,8 @@
 # If the kernel has no netem this is skipped silently for 0/0/0, and fails loudly otherwise.
 D=${1:-0}; L=${2:-0}; R=${3:-0}
 RATE=""; if awk "BEGIN{exit !($R>0)}"; then RATE="rate ${R}mbit"; fi
-if sudo ip netns exec cli tc qdisc replace dev veth-c root netem limit 20000 delay ${D}ms $RATE 2>/tmp/netem_err.txt && \
-   sudo ip netns exec srv tc qdisc replace dev veth-s root netem limit 20000 delay ${D}ms loss ${L}% $RATE 2>>/tmp/netem_err.txt; then
+if ip netns exec cli tc qdisc replace dev veth-c root netem limit 20000 delay ${D}ms $RATE 2>/tmp/netem_err.txt && \
+   ip netns exec srv tc qdisc replace dev veth-s root netem limit 20000 delay ${D}ms loss ${L}% $RATE 2>>/tmp/netem_err.txt; then
   exit 0
 fi
 if awk "BEGIN{exit !($D==0 && $L==0 && $R==0)}"; then exit 0; fi
