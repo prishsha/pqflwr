@@ -24,11 +24,16 @@ def sh(cmd, **kw):
     except FileNotFoundError:
         return subprocess.CompletedProcess(cmd, 127, "", "command not found")
 
-def set_netem(delay_ms, loss_pct):
-    """One-way delay is applied on BOTH sides (RTT = 2*delay); loss only on the server side."""
-    r = sh(["bash", os.path.join(ROOT, "netem", "set_netem.sh"), str(delay_ms), str(loss_pct)])
+def set_netem(delay_ms, loss_pct, rate_mbit=0):
+    """One-way delay on BOTH sides (RTT = 2*delay); loss on the server side only; optional rate limit (Mbit/s)."""
+    r = sh(["bash", os.path.join(ROOT, "netem", "set_netem.sh"), str(delay_ms), str(loss_pct), str(rate_mbit)])
     if r.returncode != 0:
         raise RuntimeError("netem failed: " + r.stderr)
+
+def tune_route(initcwnd=0, rto_min_ms=0):
+    r = sh(["bash", os.path.join(ROOT, "netem", "tune_route.sh"), str(int(initcwnd)), str(int(rto_min_ms))])
+    if r.returncode != 0:
+        raise RuntimeError("route tuning failed: " + r.stderr)
 
 def start_nginx(ns, conf, rundir, tag, local=False):
     p = subprocess.Popen(nsx(ns, [NGINX, "-p", rundir, "-c", conf, "-e", os.path.join(rundir, tag + "_boot.log"),

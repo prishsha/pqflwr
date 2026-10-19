@@ -57,7 +57,11 @@ def per_stream(df):
                 w = g[(g.no >= c1.no) & (g.no <= end.no)]
                 wd = w[w.plen > 0]
                 s2c = wd[wd["ip.src"] != client]
-                r.update({"hs_ms": (end.t - c1.t) * 1000, "hs_frame_bytes": int(w.len.sum()),
+                # bursts: groups of server segments separated by a gap longer than half an RTT.
+                # bursts-1 = number of times the server had to wait for the client's ACKs (initial-window stall).
+                gap = max(0.5 * rtt, 1.0) / 1000 if rtt == rtt else 0.001
+                ts = s2c.t.values; bursts = 1 + int((np.diff(ts) > gap).sum()) if len(ts) > 1 else 1
+                r.update({"hs_s2c_bursts": bursts, "hs_ms": (end.t - c1.t) * 1000, "hs_frame_bytes": int(w.len.sum()),
                           "hs_payload_c2s": int(wd[wd["ip.src"] == client].plen.sum()),
                           "hs_payload_s2c": int(s2c.plen.sum()), "hs_segments_s2c": len(s2c),
                           "flight_span_ms": (s2c.t.max() - s1.t) * 1000, "retx_hs": int(w.retx.sum())})
@@ -73,7 +77,7 @@ def summary(df, ps):
         h = ps.hs_ms.dropna()
         s.update({"hs_n": len(h), "hs_mean_ms": h.mean(), "hs_median_ms": h.median(), "hs_p95_ms": h.quantile(.95),
                   "hs_p99_ms": h.quantile(.99), "hs_std_ms": h.std()})
-        for c in ["hs_frame_bytes", "hs_payload_c2s", "hs_payload_s2c", "hs_segments_s2c", "flight_span_ms", "retx_hs"]:
+        for c in ["hs_frame_bytes", "hs_payload_c2s", "hs_payload_s2c", "hs_segments_s2c", "flight_span_ms", "retx_hs", "hs_s2c_bursts"]:
             s[c + "_mean"] = ps[c].mean()
     if len(ps): s["rtt_syn_ms_mean"] = ps.rtt_syn_ms.mean()
     return s

@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it."
+title: "pqflwr: Post-quantum TLS overhead in edge federated learning"
+authors:
+  - name: "pqflwr authors"
+repository-code: "https://github.com/prishsha/pqflwr"
+license: MIT

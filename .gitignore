@@ -1,28 +1,18 @@
-# Python virtual environments
+# Python environments and caches
 venv/
 .venv/
-env/
-
-# Python cache and compiled files
 __pycache__/
 *.py[cod]
 *$py.class
-
-# Testing and coverage
 .pytest_cache/
 .coverage
 htmlcov/
-
-# Jupyter Notebook
 .ipynb_checkpoints/
 
-# Environment variables and secrets
+# Secrets
 .env
 .env.*
 !.env.example
-
-# Logs
-*.log
 
 # Editor and OS files
 .vscode/
@@ -30,19 +20,29 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# Build and packaging
+# Build artifacts
 build/
 dist/
 *.egg-info/
 
-# Experiment outputs (keep source scripts and configuration)
-results/
-*.pcap
-*.pcapng
+# Logs and generated experiment artifacts
+*.log
+runs/
+results/runs.csv
+results/runs.csv.*
+results/summary.csv
+results/stats_cells.csv
+results/stats_vs_K1.csv
+results/model_params.json
+results/model_fit_cells.csv
+results/model_cv.csv
+results/model_predictions.csv
+results/crossover.csv
+results/mitigation.csv
+results/mitigation_model_check.csv
+results/stage1_pilot.csv
+results/plots/
+evidence_stage*.zip
 
-# Temporary files
-*.tmp
-*.bak
-
-#data
-data/processed.npz
+# Keep environment setup scripts tracked.
+# Do not ignore env/ or netem/ directories.

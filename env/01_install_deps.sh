@@ -10,5 +10,5 @@ cd "$(dirname "$0")/.."
 python3 -m venv venv
 . venv/bin/activate
 pip install --upgrade pip
-pip install "flwr==1.13.1" "numpy==1.26.4" pandas matplotlib psutil scikit-learn
+pip install -r requirements.txt
 echo "DONE. Versions:"; pip list 2>/dev/null | grep -i -E "^(flwr|grpcio|numpy|pandas) "

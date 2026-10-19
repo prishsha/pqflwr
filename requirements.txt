@@ -1,0 +1,8 @@
+flwr==1.13.1
+numpy==1.26.4
+pandas
+matplotlib
+psutil
+scikit-learn
+scipy
+pytest

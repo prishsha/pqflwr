@@ -16,12 +16,17 @@ if a.init:
 else:
     init = init_params(Xte.shape[1], 2, seed=0)
 log = {"t_first_configure": None, "rounds": [], "bytes_model": int(sum(x.nbytes for x in init))}
-t_start = {}
+t_start = {}; t_dispatch = {}; t_agg0 = {}; agg_s = {}; eval_s = {}
 
 def eval_fn(server_round, params, config):
+    te0 = time.perf_counter()
     loss, acc, f1 = loss_acc_f1(params, Xte, yte)
     if server_round > 0:
+        eval_s[server_round] = time.perf_counter() - te0
         log["rounds"].append({"round": server_round + a.round_offset, "t_start": t_start.get(server_round),
+                              "t_dispatch": t_dispatch.get(server_round),   # all clients registered, FitIns about to be sent
+                              "t_agg0": t_agg0.get(server_round),           # all client updates received
+                              "agg_s": agg_s.get(server_round), "eval_s": eval_s.get(server_round),
                               "t_end": time.time(), "loss": loss, "acc": acc, "f1": f1})
     return loss, {"acc": acc, "f1": f1}
 
@@ -31,9 +36,13 @@ class S(fl.server.strategy.FedAvg):
         now = time.time()
         if log["t_first_configure"] is None: log["t_first_configure"] = now
         t_start[server_round] = now
-        return super().configure_fit(server_round, parameters, client_manager)
+        res = super().configure_fit(server_round, parameters, client_manager)   # waits until C clients are registered
+        t_dispatch[server_round] = time.time()
+        return res
     def aggregate_fit(self, server_round, results, failures):
+        t_agg0[server_round] = time.time(); ta = time.perf_counter()
         params, m = super().aggregate_fit(server_round, results, failures)
+        agg_s[server_round] = time.perf_counter() - ta
         if params is not None: S.latest = parameters_to_ndarrays(params)
         return params, m
 

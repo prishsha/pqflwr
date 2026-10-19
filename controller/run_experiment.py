@@ -20,19 +20,24 @@ ap.add_argument("--resume", default="off", choices=["on", "off"]); ap.add_argume
 ap.add_argument("--delay-ms", type=float, default=0); ap.add_argument("--loss", type=float, default=0)
 ap.add_argument("--stage", default="x"); ap.add_argument("--data", default=os.path.join(ROOT, "data", "processed.npz"))
 ap.add_argument("--local-test", action="store_true"); ap.add_argument("--epochs", type=int, default=1)
+ap.add_argument("--rate-mbit", type=float, default=0, help="link bandwidth cap, 0 = unlimited")
+ap.add_argument("--initcwnd", type=int, default=0, help="TCP initial window in segments, 0 = kernel default")
+ap.add_argument("--rto-min-ms", type=int, default=0, help="TCP minimum RTO in ms, 0 = kernel default")
+ap.add_argument("--profile", default="custom", help="name of the network profile (for the result tables)")
 a = ap.parse_args()
 L = a.local_test
 port, group, chain = C.CFGS[a.cfg]
 if L: port = 4439
 
-run_id = "%s_s%s_%s_C%d_R%d_%s_res%s_d%g_l%g_r%d" % (time.strftime("%Y%m%d-%H%M%S"), a.stage, a.cfg, a.clients, a.rounds,
-                                                       a.mode, a.resume, a.delay_ms, a.loss, a.repeat)
+run_id = "%s_s%s_%s_C%d_R%d_%s_res%s_%s_iw%d_rto%d_r%d" % (time.strftime("%Y%m%d-%H%M%S"), a.stage, a.cfg, a.clients, a.rounds,
+                                                       a.mode, a.resume, a.profile, a.initcwnd, a.rto_min_ms, a.repeat)
 rd = os.path.join(ROOT, "runs", run_id); os.makedirs(rd)
 certdir = os.path.join(ROOT, "pki", "certs")
 PY = sys.executable
 print("RUN", run_id)
 
-if not L: C.set_netem(a.delay_ms, a.loss)
+if not L:
+    C.set_netem(a.delay_ms, a.loss, a.rate_mbit); C.tune_route(a.initcwnd, a.rto_min_ms)
 procs = {}
 if not L:
     open(os.path.join(rd, "srv.conf"), "w").write(gen_conf.server_conf(rd, certdir, port, group, chain))
@@ -82,18 +87,31 @@ if not L:
     for k in ("cli", "srv"): C.stop_proc(procs[k], __import__("signal").SIGTERM)
 
 # ---- FL metrics ----
+# Old columns (kept for the pilot runs): setup_total_s / rounds_total_s.
+# New columns (control plane vs data plane):
+#   cp   = t_dispatch(round 1) - t_go           TCP + TLS handshake + gRPC/HTTP2 + Flower registration of ALL clients
+#   data = (t_agg0 - t_dispatch) - max client training time      model down + up transfer (payload), incl. loss recovery
+#   train= max client training time per round   (clients train in parallel -> slowest client)
+#   agg  = aggregation + server-side evaluation
 setup_s = []; rounds_s = []; f1 = None; cpu_fl_srv = 0; cpu_fl_cli = 0; model_bytes = 0
+cp_s = []; data_s = []; train_s = []; agg_s = []
 for sd in sess_logs:
     sj = json.load(open(os.path.join(sd, "server.json"))); cj = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(sd, "client*.json")))]
     t_go = min(c["t_go"] for c in cj); last_first_fit = max(c["t_first_fit"] for c in cj)
-    setup_s.append(last_first_fit - t_go)                        # connect + handshake + registration + slowest client
+    setup_s.append(last_first_fit - t_go)
+    cp_s.append(sj["rounds"][0]["t_dispatch"] - t_go)
     for i, r in enumerate(sj["rounds"]):
-        start = last_first_fit if i == 0 else r["t_start"]       # round 1 starts when the last client is ready
+        start = last_first_fit if i == 0 else r["t_start"]
         rounds_s.append(r["t_end"] - start); f1 = r["f1"]
+        tm = max(c["fit_s"][i] for c in cj)
+        train_s.append(tm); data_s.append((r["t_agg0"] - r["t_dispatch"]) - tm); agg_s.append(r["agg_s"] + r["eval_s"])
     cpu_fl_srv += sj["cpu_s"]; cpu_fl_cli += sum(c["cpu_s"] for c in cj); model_bytes = sj["bytes_model"]
 res = {"run_id": run_id, "stage": a.stage, "cfg": a.cfg, "mode": a.mode, "resume": a.resume, "clients": a.clients, "rounds": a.rounds,
-       "repeat": a.repeat, "delay_ms": a.delay_ms, "loss_pct": a.loss, "local_test": L,
+       "repeat": a.repeat, "profile": a.profile, "delay_ms": a.delay_ms, "rtt_ms": 2 * a.delay_ms, "loss_pct": a.loss,
+       "rate_mbit": a.rate_mbit, "initcwnd": a.initcwnd, "rto_min_ms": a.rto_min_ms, "n_sessions": n_sessions, "local_test": L,
        "setup_total_s": sum(setup_s), "rounds_total_s": sum(rounds_s), "logical_total_s": sum(setup_s) + sum(rounds_s),
+       "cp_total_s": sum(cp_s), "data_total_s": sum(data_s), "train_total_s": sum(train_s), "agg_total_s": sum(agg_s),
+       "epoch_total_s": sum(cp_s) + sum(data_s) + sum(train_s) + sum(agg_s),
        "wall_total_s": t_run1 - t_run0, "final_f1": f1, "model_bytes_one_way": model_bytes,
        "update_bytes_per_client_round": 2 * model_bytes, "cpu_fl_server_s": cpu_fl_srv, "cpu_fl_clients_s": cpu_fl_cli,
        "srv_tcp_retrans_delta": retx1 - retx0}

@@ -1,0 +1,18 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q tests
+      - name: FL smoke test on loopback (no TLS, no namespaces)
+        run: |
+          python fl/prepare_data.py --synthetic
+          python controller/run_experiment.py --cfg K1 --clients 3 --rounds 2 --mode native --local-test --stage ci
+          python controller/run_experiment.py --cfg K1 --clients 3 --rounds 2 --mode reconnect --local-test --stage ci
+      - name: shell syntax check
+        run: for f in env/*.sh netem/*.sh pki/*.sh *.sh; do bash -n "$f"; done
