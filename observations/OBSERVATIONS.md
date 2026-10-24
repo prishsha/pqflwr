@@ -188,3 +188,18 @@ run: `-`
 
 H2 full handshake at RTT 50 ms: initcwnd=4 produced a 52.62 ms server-flight span and 106.57 ms mean handshake latency, compared with a 3.74 ms flight span and 56.87 ms mean at initcwnd=10. The roughly 50 ms difference is consistent with an additional RTT, but requires confirmation from packet captures.
 
+### OBS-0039 | stage 7 | - | decision | 2026-10-23 07:43:14
+run: `-`
+
+Scaling experiment 1: clients 5 and 20, rounds 10, repeats 5, profiles LAN WAN100 LOSS3, resumption off; default configurations and connection modes. Reduced repeats to limit runtime.
+
+### OBS-0040 | stage 7 | - | decision | 2026-10-24 08:47:51
+run: `-`
+
+Reduced Stage 7 matrix: client scaling C=5,20 with R=10 and 5 repeats on LAN/WAN100/LOSS3; persistent scaling C=10 with R=20,30 and 5 repeats on LAN/WAN100/LOSS3; reconnect resumption comparison C=10, R=20, 5 repeats on WAN100 with resume off/on. Native and reconnect modes evaluated; matrix runner supports resuming missing runs. Stage 7.4 higher-repeat confirmation cells not completed.
+
+### OBS-0041 | stage 7 | - | measurement | 2026-10-24 08:49:00
+run: `-`
+
+Handshake instrumentation summary: native persistent mode, C=10, R=20/30: median n_syn=10 per run; median n_sessions=1. Reconnect mode, C=10, R=20: median n_syn=200 per run, matching C x R=200. With resumption off, median n_resumed_psk=0; with resumption on, median n_resumed_psk=190/200 (95%). Native n_clienthello mean=8 despite median=10 and some zero counts, indicating incomplete or inconsistent ClientHello capture; interpret ClientHello counts cautiously.
+
