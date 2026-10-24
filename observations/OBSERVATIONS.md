@@ -203,3 +203,23 @@ run: `-`
 
 Handshake instrumentation summary: native persistent mode, C=10, R=20/30: median n_syn=10 per run; median n_sessions=1. Reconnect mode, C=10, R=20: median n_syn=200 per run, matching C x R=200. With resumption off, median n_resumed_psk=0; with resumption on, median n_resumed_psk=190/200 (95%). Native n_clienthello mean=8 despite median=10 and some zero counts, indicating incomplete or inconsistent ClientHello capture; interpret ClientHello counts cautiously.
 
+### OBS-0042 | stage 9 | - | measurement | 2026-10-24 09:01:24
+run: `-`
+
+Model fit: control plane MAPE 27.83%, data plane MAPE 36.93%, total MAPE 11.93% (total R2 0.564). Parameters: kappa_reg 2.6102, tau_cp 0.6055 s, kappa_pay_pers/trans 0.0/0.0, theta_ser 0.06734, theta_tls 0.04473, tau_data 0.28785 s.
+
+### OBS-0043 | stage 9 | - | measurement | 2026-10-24 09:01:36
+run: `-`
+
+Leave-one-profile-out total MAPE: LAN 16.16%, LOSS3 19.97%, LOSS5 8.85%, WAN100 18.62%. The output currently lists four held-out profiles; WAN50 and LOSS1 results are not present in this table.
+
+### OBS-0044 | stage 9 | - | decision | 2026-10-24 09:01:46
+run: `-`
+
+Stage 9 analytical model fitted using non-negative least squares. In-sample total MAPE is 11.93%, but total R2 is 0.564 and data-plane R2 is 0.0214. Both fitted payload round-trip parameters are zero. Interpret component-level and held-out-profile errors before making broad predictive claims.
+
+### OBS-0045 | stage 9 | - | anomaly | 2026-10-24 09:02:27
+run: `-`
+
+Leave-one-profile-out total MAPE: LAN 16.16%, LOSS3 19.97%, LOSS5 8.85%, WAN100 18.62%. Threshold classification agreement was 67.31% at 1%, 70.19% at 5%, and 77.88% at 10%. In-sample total MAPE was 11.93%, but total R2 was 0.564 and data-plane R2 was 0.0214. The model's predictions are not uniformly accurate across profiles; the cause of the largest errors requires further examination.
+
